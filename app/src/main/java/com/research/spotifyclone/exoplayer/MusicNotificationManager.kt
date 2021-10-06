@@ -14,25 +14,32 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.research.spotifyclone.R
+import com.research.spotifyclone.utils.Constants.NOTIFICATION_CHANNEL_ID
+import com.research.spotifyclone.utils.Constants.NOTIFICATION_ID
 
 class MusicNotificationManager(
     private val context: Context,
     sessionToken: MediaSessionCompat.Token,
     notificationListener: PlayerNotificationManager.NotificationListener,
-    private val newCallBack: () -> Unit
+    private val newSongCallback: () -> Unit
 ) {
 
     private val notificationManager: PlayerNotificationManager
 
     init {
-        val controller = MediaControllerCompat(context, sessionToken)
-        notificationManager = PlayerNotificationManager.Builder(
+        val mediaController = MediaControllerCompat(context, sessionToken)
+        notificationManager = PlayerNotificationManager.createWithNotificationChannel(
             context,
-            1,
-            "MUSIC"
-        ).setMediaDescriptionAdapter(DescriptionAdapter(controller))
-            .setSmallIconResourceId(R.drawable.ic_music)
-            .build()
+            NOTIFICATION_CHANNEL_ID,
+            R.string.notification_channel_name,
+            R.string.notification_channel_description,
+            NOTIFICATION_ID,
+            DescriptionAdapter(mediaController),
+            notificationListener
+        ).apply {
+            setSmallIcon(R.drawable.ic_music)
+            setMediaSessionToken(sessionToken)
+        }
     }
 
     fun showNotification(player: Player) {
@@ -42,14 +49,13 @@ class MusicNotificationManager(
     private inner class DescriptionAdapter(
         private val mediaController: MediaControllerCompat
     ) : PlayerNotificationManager.MediaDescriptionAdapter {
-        override fun getCurrentContentTitle(player: Player): CharSequence {
 
+        override fun getCurrentContentTitle(player: Player): CharSequence {
             return mediaController.metadata.description.title.toString()
         }
 
         override fun createCurrentContentIntent(player: Player): PendingIntent? {
             return mediaController.sessionActivity
-
         }
 
         override fun getCurrentContentText(player: Player): CharSequence? {
@@ -70,13 +76,9 @@ class MusicNotificationManager(
                         callback.onBitmap(resource)
                     }
 
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                        TODO("Not yet implemented")
-                    }
+                    override fun onLoadCleared(placeholder: Drawable?) = Unit
                 })
             return null
         }
-
     }
-
 }

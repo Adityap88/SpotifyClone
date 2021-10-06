@@ -21,13 +21,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var songAdapter: SongAdapter
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         setupRecyclerView()
         subscribeToObservers()
 
-        songAdapter.setItemClickListener {
+        songAdapter.setOnItemClickListener {
             mainViewModel.playOrToggleSong(it)
         }
     }
@@ -52,6 +53,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 }
+
 
 
 

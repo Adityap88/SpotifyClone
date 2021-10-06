@@ -29,6 +29,7 @@ object ServiceModule {
         .setContentType(C.CONTENT_TYPE_MUSIC)
         .setUsage(C.USAGE_MEDIA)
         .build()
+
     @Provides
     @ServiceScoped
     fun provideExoPlayer(

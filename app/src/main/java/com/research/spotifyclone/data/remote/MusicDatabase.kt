@@ -1,5 +1,6 @@
 package com.research.spotifyclone.data.remote
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.research.spotifyclone.data.entities.Song
 import com.research.spotifyclone.utils.Constants.COLLECTION_SONG
@@ -15,6 +16,7 @@ class MusicDatabase {
 
         }catch (e:Exception){
             emptyList()
+
         }
     }
 }

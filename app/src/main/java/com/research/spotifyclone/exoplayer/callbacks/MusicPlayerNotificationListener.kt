@@ -5,16 +5,17 @@ import android.content.Intent
 import androidx.core.content.ContextCompat
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.research.spotifyclone.exoplayer.MusicService
+import com.research.spotifyclone.utils.Constants.NOTIFICATION_ID
 
-class NotificationListener(
+class MusicPlayerNotificationListener(
     private val musicService: MusicService
-) :PlayerNotificationManager.NotificationListener{
+) : PlayerNotificationManager.NotificationListener {
 
     override fun onNotificationCancelled(notificationId: Int, dismissedByUser: Boolean) {
         super.onNotificationCancelled(notificationId, dismissedByUser)
         musicService.apply {
             stopForeground(true)
-            isForeground=false
+            isForegroundService = false
             stopSelf()
         }
     }
@@ -26,13 +27,13 @@ class NotificationListener(
     ) {
         super.onNotificationPosted(notificationId, notification, ongoing)
         musicService.apply {
-            if(ongoing && !isForeground){
+            if(ongoing && !isForegroundService) {
                 ContextCompat.startForegroundService(
                     this,
-                    Intent(applicationContext,this::class.java)
+                    Intent(applicationContext, this::class.java)
                 )
-                startForeground(1,notification)
-                isForeground=true
+                startForeground(NOTIFICATION_ID, notification)
+                isForegroundService = true
             }
         }
     }

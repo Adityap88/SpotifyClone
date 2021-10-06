@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/adity/AndroidStudioProjects/SpotifyClone/app/src/main/res/drawable/circle_drawable.xml" value="0.225" />
+        <entry key="..\:/Users/adity/AndroidStudioProjects/SpotifyClone/app/src/main/res/drawable/ic_playlist.xml" value="0.2703125" />
+        <entry key="..\:/Users/adity/AndroidStudioProjects/SpotifyClone/app/src/main/res/drawable/ic_search.xml" value="0.2703125" />
         <entry key="..\:/Users/adity/AndroidStudioProjects/SpotifyClone/app/src/main/res/drawable/ic_skip.xml" value="0.2703125" />
-        <entry key="..\:/Users/adity/AndroidStudioProjects/SpotifyClone/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/adity/AndroidStudioProjects/SpotifyClone/app/src/main/res/drawable/ic_skip_previous.xml" value="0.2703125" />
+        <entry key="..\:/Users/adity/AndroidStudioProjects/SpotifyClone/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/adity/AndroidStudioProjects/SpotifyClone/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/adity/AndroidStudioProjects/SpotifyClone/app/src/main/res/layout/fragment_song.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/adity/AndroidStudioProjects/SpotifyClone/app/src/main/res/layout/fragmet_song.xml" value="0.25416666666666665" />

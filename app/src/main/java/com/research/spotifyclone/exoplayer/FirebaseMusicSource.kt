@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+
 class FirebaseMusicSource @Inject constructor(
     private val musicDatabase: MusicDatabase
 ) {
@@ -23,7 +24,7 @@ class FirebaseMusicSource @Inject constructor(
         state = STATE_INITIALIZING
         val allSong = musicDatabase.getAllSongs()
         songs = allSong.map { song ->
-            MediaMetadataCompat.Builder()
+            Builder()
                 .putString(METADATA_KEY_ARTIST, song.subtitle)
                 .putString(METADATA_KEY_MEDIA_ID, song.mediaId)
                 .putString(METADATA_KEY_TITLE, song.title)
@@ -43,10 +44,10 @@ class FirebaseMusicSource @Inject constructor(
     fun asMediaItems() = songs.map { song ->
         val desc = MediaDescriptionCompat.Builder()
             .setMediaUri(song.getString(METADATA_KEY_MEDIA_URI).toUri())
-            .setTitle(song.description.title)
-            .setSubtitle(song.description.subtitle)
-            .setIconUri(song.description.iconUri)
-            .setMediaId(song.description.mediaId)
+            .setTitle(song.description.title.toString())
+            .setSubtitle(song.description.subtitle.toString())
+            .setIconUri(song.getString(METADATA_KEY_DISPLAY_ICON_URI).toUri())
+            .setMediaId(song.description.mediaId.toString())
             .build()
         MediaBrowserCompat.MediaItem(desc, FLAG_PLAYABLE)
     }.toMutableList()

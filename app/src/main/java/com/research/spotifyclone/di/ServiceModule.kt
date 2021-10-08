@@ -25,7 +25,7 @@ object ServiceModule {
 
     @Provides
     @ServiceScoped
-    fun providesAudioAttribute() = com.google.android.exoplayer2.audio.AudioAttributes.Builder()
+    fun provideAudioAttribute() = com.google.android.exoplayer2.audio.AudioAttributes.Builder()
         .setContentType(C.CONTENT_TYPE_MUSIC)
         .setUsage(C.USAGE_MEDIA)
         .build()
